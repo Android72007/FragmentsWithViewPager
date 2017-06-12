@@ -1,6 +1,7 @@
 package com.ravitej.fragmentswithviewpager.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.ravitej.fragmentswithviewpager.R;
 import com.ravitej.fragmentswithviewpager.model.Crime;
+import com.ravitej.fragmentswithviewpager.view.CrimeActivity;
 
 import java.util.List;
 
@@ -45,6 +47,7 @@ public class CrimeRecyclerAdapter extends RecyclerView.Adapter<CrimeRecyclerAdap
 
     public class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        public static final String CRIME_ID = "crime_id";
         private Crime mCrime;
         private TextView mTitle;
         private TextView mDate;
@@ -64,6 +67,9 @@ public class CrimeRecyclerAdapter extends RecyclerView.Adapter<CrimeRecyclerAdap
         @Override
         public void onClick(View v) {
             Toast.makeText(mContext, mCrime.getmTitle(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(mContext, CrimeActivity.class);
+            intent.putExtra(CRIME_ID, mCrime.getmId());
+            mContext.startActivity(intent);
         }
     }
 }

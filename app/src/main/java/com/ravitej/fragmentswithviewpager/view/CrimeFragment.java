@@ -15,8 +15,11 @@ import android.widget.EditText;
 
 import com.ravitej.fragmentswithviewpager.R;
 import com.ravitej.fragmentswithviewpager.model.Crime;
+import com.ravitej.fragmentswithviewpager.model.CrimeLab;
 
-import static android.widget.CompoundButton.*;
+import java.util.UUID;
+
+import static android.widget.CompoundButton.OnCheckedChangeListener;
 
 /**
  * Created by No One on 6/12/2017.
@@ -29,10 +32,20 @@ public class CrimeFragment extends Fragment {
     private Button mDateButton;
     private CheckBox mIsSolved;
 
+    /*Attaching Arguments to fragments*/
+    public static Fragment newInstance(UUID crimeId){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Crime_ID", crimeId);
+        CrimeFragment fragment = new CrimeFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCrime = new Crime();
+        UUID crimeId = (UUID)getArguments().getSerializable("Crime_ID");
+        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 
     @Nullable
@@ -41,6 +54,7 @@ public class CrimeFragment extends Fragment {
         View view = inflater.inflate(R.layout.crime_fragment, container, false);
         /*Getting EditText View instance and adding listner to the EditText*/
         mTitleText = (EditText)view.findViewById(R.id.crime_title);
+        mTitleText.setText(mCrime.getmTitle());
         setTitleListner();
 
         /*Setting Date to the Button and Disabling it*/
@@ -50,6 +64,7 @@ public class CrimeFragment extends Fragment {
 
         /*Listneing for check box changes*/
         mIsSolved = (CheckBox)view.findViewById(R.id.crime_issolved);
+        mIsSolved.setChecked(mCrime.ismSolved());
         setCheckBoxListner();
 
         return view;
