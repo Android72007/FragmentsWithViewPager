@@ -3,6 +3,7 @@ package com.ravitej.fragmentswithviewpager.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -60,7 +61,16 @@ public class CrimeFragment extends Fragment {
         /*Setting Date to the Button and Disabling it*/
         mDateButton = (Button)view.findViewById(R.id.crime_date);
         mDateButton.setText(mCrime.getmDate().toString());
-        mDateButton.setEnabled(false);
+//        mDateButton.setEnabled(false);
+
+        mDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                DatePickerFragment datePickerFragment = new DatePickerFragment();
+                datePickerFragment.show(fm, "DialogDate");
+            }
+        });
 
         /*Listneing for check box changes*/
         mIsSolved = (CheckBox)view.findViewById(R.id.crime_issolved);

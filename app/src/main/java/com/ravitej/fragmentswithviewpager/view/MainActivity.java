@@ -9,7 +9,7 @@ import com.ravitej.fragmentswithviewpager.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int SPLASH_TIME_OUT = 3000;
+    private static final int SPLASH_TIME_OUT = 1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
