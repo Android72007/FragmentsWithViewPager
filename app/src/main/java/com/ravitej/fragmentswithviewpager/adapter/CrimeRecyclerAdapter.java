@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.ravitej.fragmentswithviewpager.R;
 import com.ravitej.fragmentswithviewpager.model.Crime;
-import com.ravitej.fragmentswithviewpager.view.CrimeActivity;
+import com.ravitej.fragmentswithviewpager.view.CrimePagerActivity;
 
 import java.util.List;
 
@@ -67,7 +67,7 @@ public class CrimeRecyclerAdapter extends RecyclerView.Adapter<CrimeRecyclerAdap
         @Override
         public void onClick(View v) {
             Toast.makeText(mContext, mCrime.getmTitle(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(mContext, CrimeActivity.class);
+            Intent intent = new Intent(mContext, CrimePagerActivity.class);
             intent.putExtra(CRIME_ID, mCrime.getmId());
             mContext.startActivity(intent);
         }
